@@ -1,0 +1,29 @@
+<%= form_for(@texto_palabra) do |f| %>
+  <% if @texto_palabra.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@texto_palabra.errors.count, "error") %> prohibited this texto_palabra from being saved:</h2>
+
+      <ul>
+      <% @texto_palabra.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id_tp %><br>
+    <%= f.number_field :id_tp %>
+  </div>
+  <div class="field">
+    <%= f.label :id_texto %><br>
+    <%= f.number_field :id_texto %>
+  </div>
+  <div class="field">
+    <%= f.label :id_palabrab %><br>
+    <%= f.number_field :id_palabrab %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

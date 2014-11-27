@@ -1,0 +1,29 @@
+<%= form_for(@palabra_bolsa) do |f| %>
+  <% if @palabra_bolsa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@palabra_bolsa.errors.count, "error") %> prohibited this palabra_bolsa from being saved:</h2>
+
+      <ul>
+      <% @palabra_bolsa.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id_palabrab %><br>
+    <%= f.number_field :id_palabrab %>
+  </div>
+  <div class="field">
+    <%= f.label :nombre_palabra %><br>
+    <%= f.text_field :nombre_palabra %>
+  </div>
+  <div class="field">
+    <%= f.label :puntaje %><br>
+    <%= f.number_field :puntaje %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

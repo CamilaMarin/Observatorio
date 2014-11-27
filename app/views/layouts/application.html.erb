@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Observatorio</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="contenedor">
+   <header>
+      <h1> Observatorio Reclamos de Internet</h1>
+   </header>
+   <nav>
+      <ul>
+         <li class="usuarios"> <%= link_to "Usuarios", :controller => "usuarios", :action => "index" %> </li>
+         <li class="tweets"> <%= link_to "Tweets", :controller => "tweets", :action => "index" %> </li>
+         <li class="textos"> <%= link_to "Textos", :controller => "textos", :action => "index" %> </li>
+         <li class="actors"> <%= link_to "Actores", :controller => "actors", :action => "index" %> </li>
+         <li class="cuentas"> <%= link_to "Cuentas", :controller => "cuenta", :action => "index" %> </li>
+         <li class="actor_tweets"> <%= link_to "Actores - Tweets", :controller => "actor_tweets", :action => "index" %> </li>
+         <li class="hashtags"> <%= link_to "Hashtags", :controller => "hashtags", :action => "index" %> </li>
+         <li class="palabra_bolsas"> <%= link_to "Bolsa de palabras", :controller => "palabra_bolsas", :action => "index" %> </li>
+         <li class="palabra_claves"> <%= link_to "Palabras Claves", :controller => "palabra_claves", :action => "index" %> </li>
+         <li class="texto_palabras"> <%= link_to "Texto Palabras", :controller => "texto_palabras", :action => "index" %> </li>
+      </ul>
+      <div class="clear"></div>
+   </nav> 
+   <section>
+   <%= yield %>
+   </section> 
+</div>
+
+</body>
+</html>

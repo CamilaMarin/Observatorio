@@ -1,0 +1,62 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+body {
+   background-color: #008B8B;
+} 
+#contenedor {
+   background-color: #fff;
+   width: 900px;
+   margin: 0px auto 0px auto;
+   padding: 10px;
+   border: solid 1px #ccc;
+   box-shadow: 1px 1px 5px #000;
+   -moz-box-shadow: 1px 1px 5px #000;
+   -webkit-box-shadow: 1px 1px 5px #000;
+}
+header {
+   text-align: center;
+}
+nav ul{
+   width: 450px;
+   margin: 0px auto 0px auto;
+}
+nav li{
+   float: left;
+   width: 160px;
+   height: 20px;
+   list-style: none;
+   border: solid 1px #999;
+   margin-right: 10px;
+   background-repeat: no-repeat;
+   -moz-border-radius: 5px 15px 5px 5px;
+   -webkit-border-radius: 5px 15px 5px 5px;
+   text-align: center;
+}
+nav a {
+   font-weight: bold;
+   color: #000;
+   text-decoration: none;
+}
+section .imagen_logo {
+   float: left;
+   width: auto;
+}
+section .descipcion p {
+   text-align: justify;
+}
+.clear {
+   clear: both;
+}

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_at: 1
+  id_actor: 1
+  id_tweet: 1
+
+two:
+  id_at: 1
+  id_actor: 1
+  id_tweet: 1

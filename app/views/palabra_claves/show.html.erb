@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id palabra:</strong>
+  <%= @palabra_clafe.id_palabra %>
+</p>
+
+<p>
+  <strong>Id actor:</strong>
+  <%= @palabra_clafe.id_actor %>
+</p>
+
+<p>
+  <strong>Nombre palabra clave:</strong>
+  <%= @palabra_clafe.nombre_palabra_clave %>
+</p>
+
+<%= link_to 'Edit', edit_palabra_clafe_path(@palabra_clafe) %> |
+<%= link_to 'Back', palabra_claves_path %>

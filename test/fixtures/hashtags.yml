@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_hashtag: 1
+  id_actor: 1
+  nombre_hashtag: MyString
+
+two:
+  id_hashtag: 1
+  id_actor: 1
+  nombre_hashtag: MyString

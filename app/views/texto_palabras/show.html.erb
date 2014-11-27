@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id tp:</strong>
+  <%= @texto_palabra.id_tp %>
+</p>
+
+<p>
+  <strong>Id texto:</strong>
+  <%= @texto_palabra.id_texto %>
+</p>
+
+<p>
+  <strong>Id palabrab:</strong>
+  <%= @texto_palabra.id_palabrab %>
+</p>
+
+<%= link_to 'Edit', edit_texto_palabra_path(@texto_palabra) %> |
+<%= link_to 'Back', texto_palabras_path %>

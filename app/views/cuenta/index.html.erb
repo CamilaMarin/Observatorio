@@ -1,0 +1,31 @@
+<h1>Listing cuenta</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id cuenta</th>
+      <th>Id actor</th>
+      <th>Nombre cuenta</th>
+      <th>Cantidad seguidores</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cuenta.each do |cuentum| %>
+      <tr>
+        <td><%= cuentum.id_cuenta %></td>
+        <td><%= cuentum.id_actor %></td>
+        <td><%= cuentum.nombre_cuenta %></td>
+        <td><%= cuentum.cantidad_seguidores %></td>
+        <td><%= link_to 'Show', cuentum %></td>
+        <td><%= link_to 'Edit', edit_cuentum_path(cuentum) %></td>
+        <td><%= link_to 'Destroy', cuentum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cuentum', new_cuentum_path %>

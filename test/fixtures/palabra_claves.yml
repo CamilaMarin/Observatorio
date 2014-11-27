@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_palabra: 1
+  id_actor: 1
+  nombre_palabra_clave: MyString
+
+two:
+  id_palabra: 1
+  id_actor: 1
+  nombre_palabra_clave: MyString

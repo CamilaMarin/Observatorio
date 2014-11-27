@@ -1,0 +1,2 @@
+module PalabraBolsasHelper
+end

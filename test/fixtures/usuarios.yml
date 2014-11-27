@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_usuario: 1
+  cuenta: MyString
+
+two:
+  id_usuario: 1
+  cuenta: MyString

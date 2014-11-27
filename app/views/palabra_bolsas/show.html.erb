@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id palabrab:</strong>
+  <%= @palabra_bolsa.id_palabrab %>
+</p>
+
+<p>
+  <strong>Nombre palabra:</strong>
+  <%= @palabra_bolsa.nombre_palabra %>
+</p>
+
+<p>
+  <strong>Puntaje:</strong>
+  <%= @palabra_bolsa.puntaje %>
+</p>
+
+<%= link_to 'Edit', edit_palabra_bolsa_path(@palabra_bolsa) %> |
+<%= link_to 'Back', palabra_bolsas_path %>

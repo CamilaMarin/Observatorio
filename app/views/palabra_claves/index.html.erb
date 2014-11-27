@@ -1,0 +1,29 @@
+<h1>Listing palabra_claves</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id palabra</th>
+      <th>Id actor</th>
+      <th>Nombre palabra clave</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @palabra_claves.each do |palabra_clafe| %>
+      <tr>
+        <td><%= palabra_clafe.id_palabra %></td>
+        <td><%= palabra_clafe.id_actor %></td>
+        <td><%= palabra_clafe.nombre_palabra_clave %></td>
+        <td><%= link_to 'Show', palabra_clafe %></td>
+        <td><%= link_to 'Edit', edit_palabra_clafe_path(palabra_clafe) %></td>
+        <td><%= link_to 'Destroy', palabra_clafe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Palabra clave', new_palabra_clafe_path %>

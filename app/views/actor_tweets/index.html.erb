@@ -1,0 +1,29 @@
+<h1>Listing actor_tweets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id at</th>
+      <th>Id actor</th>
+      <th>Id tweet</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @actor_tweets.each do |actor_tweet| %>
+      <tr>
+        <td><%= actor_tweet.id_at %></td>
+        <td><%= actor_tweet.id_actor %></td>
+        <td><%= actor_tweet.id_tweet %></td>
+        <td><%= link_to 'Show', actor_tweet %></td>
+        <td><%= link_to 'Edit', edit_actor_tweet_path(actor_tweet) %></td>
+        <td><%= link_to 'Destroy', actor_tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Actor tweet', new_actor_tweet_path %>

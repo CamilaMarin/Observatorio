@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_tweet: 1
+  id_texto: 1
+  id_usuario: 1
+  region: MyString
+  fecha: 2014-11-26
+  clasificacion: MyString
+
+two:
+  id_tweet: 1
+  id_texto: 1
+  id_usuario: 1
+  region: MyString
+  fecha: 2014-11-26
+  clasificacion: MyString

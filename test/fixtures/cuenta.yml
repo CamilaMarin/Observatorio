@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_cuenta: 1
+  id_actor: 1
+  nombre_cuenta: MyString
+  cantidad_seguidores: MyString
+
+two:
+  id_cuenta: 1
+  id_actor: 1
+  nombre_cuenta: MyString
+  cantidad_seguidores: MyString
