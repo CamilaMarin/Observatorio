@@ -1,4 +1,4 @@
-<h1>Listing palabra_bolsas</h1>
+<h1>Tabla Bolsa de Palabras</h1>
 
 <table>
   <thead>
@@ -16,9 +16,9 @@
         <td><%= palabra_bolsa.id_palabrab %></td>
         <td><%= palabra_bolsa.nombre_palabra %></td>
         <td><%= palabra_bolsa.puntaje %></td>
-        <td><%= link_to 'Show', palabra_bolsa %></td>
-        <td><%= link_to 'Edit', edit_palabra_bolsa_path(palabra_bolsa) %></td>
-        <td><%= link_to 'Destroy', palabra_bolsa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', palabra_bolsa %></td>
+        <td><%= link_to 'Editar', edit_palabra_bolsa_path(palabra_bolsa) %></td>
+        <td><%= link_to 'Eliminar', palabra_bolsa, method: :delete, data: { confirm: '¿Está seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Palabra bolsa', new_palabra_bolsa_path %>
+<%= link_to 'Nueva Palabra bolsa', new_palabra_bolsa_path %>

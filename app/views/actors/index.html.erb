@@ -1,4 +1,4 @@
-<h1>Listing actors</h1>
+<h1>Tabla Actores</h1>
 
 <table>
   <thead>
@@ -14,9 +14,9 @@
       <tr>
         <td><%= actor.id_actor %></td>
         <td><%= actor.nombre_actor %></td>
-        <td><%= link_to 'Show', actor %></td>
-        <td><%= link_to 'Edit', edit_actor_path(actor) %></td>
-        <td><%= link_to 'Destroy', actor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', actor %></td>
+        <td><%= link_to 'Editar', edit_actor_path(actor) %></td>
+        <td><%= link_to 'Eliminar', actor, method: :delete, data: { confirm: '¿Está seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Actor', new_actor_path %>
+<%= link_to 'Nuevo Actor', new_actor_path %>

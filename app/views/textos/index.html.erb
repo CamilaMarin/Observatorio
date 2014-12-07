@@ -1,4 +1,4 @@
-<h1>Listing textos</h1>
+<h1>Tabla Textos</h1>
 
 <table>
   <thead>
@@ -16,9 +16,9 @@
         <td><%= texto.id_tweet %></td>
         <td><%= texto.id_texto %></td>
         <td><%= texto.texto %></td>
-        <td><%= link_to 'Show', texto %></td>
-        <td><%= link_to 'Edit', edit_texto_path(texto) %></td>
-        <td><%= link_to 'Destroy', texto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', texto %></td>
+        <td><%= link_to 'Editar', edit_texto_path(texto) %></td>
+        <td><%= link_to 'Eliminar', texto, method: :delete, data: { confirm: '¿Está seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Texto', new_texto_path %>
+<%= link_to 'Nuevo Texto', new_texto_path %>

@@ -5,27 +5,39 @@ class WelcomeController < ApplicationController
       config.consumer_secret     = "VJ8tRme5LRsn33pPKjsP7obOkL4To6g8zq8zjnX6NLDwIJRjlm"
       config.access_token        = "524309920-sctPPH0nSCihN00BBoUZKkycTBIMSb2h6tOS4bWv"
       config.access_token_secret = "ekrwNLiRSxxGnoHxGECw8KiVAmH9rhD4WXO9PaR6JaRfE"
-    end 
-#    @topics = ["VTRsoporte lag","VTRsoporte internet","VTRsoporte modem","VTRsoporte conexion","VTRsoporte router","VTRsoporte pagina","VTRsoporte wifi","VTRsoporte wi-fi","VTRsoporte pc","VTRsoporte computador","VTRsoporte navegador","VTRsoporte navegando","VTRsoporte web","AyudaMovistarCL lag","AyudaMovistarCL internet","AyudaMovistarCL modem","AyudaMovistarCL conexion","AyudaMovistarCL router","AyudaMovistarCL pagina","AyudaMovistarCL wifi","AyudaMovistarCL wi-fi","AyudaMovistarCL pc","AyudaMovistarCL computador","AyudaMovistarCL navegador","AyudaMovistarCL navegando","AyudaMovistarCL web","clarochile_cl lag","clarochile_cl internet","clarochile_cl modem","clarochile_cl conexion","clarochile_cl router","clarochile_cl pagina","clarochile_cl wifi","clarochile_cl wi-fi","clarochile_cl pc","clarochile_cl computador","clarochile_cl navegador","clarochile_cl navegando","clarochile_cl web","MovistarChile lag","MovistarChile internet","MovistarChile modem","MovistarChile conexion","MovistarChile router","MovistarChile pagina","MovistarChile wifi","MovistarChile wi-fi","MovistarChile pc","MovistarChile computador","MovistarChile navegador","MovistarChile navegando","MovistarChile web","VTRChile lag","VTRChile internet","VTRChile modem","VTRChile conexion","VTRChile router","VTRChile pagina","VTRChile wifi","VTRChile wi-fi","VTRChile pc","VTRChile computador","VTRChile navegador","VTRChile navegando","VTRChile web"]
-    
+    end   
+    #tabla de Palabras Claves
     @tabla = PalabraClave.all()
+    #Seleccion de la columna de los nombres de las palabras claves
     @topics = @tabla.select("nombre_palabra_clave")
-  	contador = 0
-    id__actor = 0
+    #tabla de la bolsa de palabras
+    @palabras_bolsa = PalabraBolsa.all()
+    #Seleccion de la columna de los nombres de la bolsa de palabras
+    @palabras = @palabras_bolsa.select("nombre_palabra")
+    #contador correspondiente a los id
+  	contador = 0000
    	@topics.each do |t|
+      #Busca tweet asociados a las palabras claves
     	@search = $client.search(t.nombre_palabra_clave, :include_rts => false, :lang => "es").take(1).collect  
   	 	@search.each do |tweets| 
   		   @texto = Texto.new({id_tweet: tweets.id, id_texto: contador,texto: tweets.text}); 
-  		   if Texto.where(id_tweet: @texto.id_tweet).count > 0
+  		   if Texto.where(id_tweet: @texto.id_tweet).count > 0 #si ya existe el tweet no lo agrega
   		   else
+            #guarda el texto
   			    @texto.save();
+            #crea y guarda el id del usuario y el nombre de la cuenta
   			    @usuario = Usuario.create({id_usuario: tweets.user.id, cuenta: tweets.user.name})
+            #crea y guarda el id del tweet, id del texto, id del usuario, la region(si la tiene) y la fecha de cración del tweet
   			   	@tweet = Tweet.create({id_tweet: tweets.id, id_texto: contador,id_usuario: tweets.user.id, region: tweets.user.location, fecha: tweets.created_at})
+            #busca el id del actor asociado al tweet
             @id__actor = @tabla.select("id_actor").where(nombre_palabra_clave: t.nombre_palabra_clave).limit(1)
             @id__actor.each do |a|
               id_actor_a = a.id_actor
+              #crea y guarda el id del actor-tweet, el id del actor y el id del tweet
               @actor = ActorTweet.create({id_at: contador, id_actor: id_actor_a, id_tweet: tweets.id})
             end
+
+
   		   		contador += 1
   		    end
   		end

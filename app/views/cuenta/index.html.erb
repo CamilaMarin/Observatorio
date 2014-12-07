@@ -1,4 +1,4 @@
-<h1>Listing cuenta</h1>
+<h1>Tabla Cuenta</h1>
 
 <table>
   <thead>
@@ -18,9 +18,9 @@
         <td><%= cuentum.id_actor %></td>
         <td><%= cuentum.nombre_cuenta %></td>
         <td><%= cuentum.cantidad_seguidores %></td>
-        <td><%= link_to 'Show', cuentum %></td>
-        <td><%= link_to 'Edit', edit_cuentum_path(cuentum) %></td>
-        <td><%= link_to 'Destroy', cuentum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', cuentum %></td>
+        <td><%= link_to 'Editar', edit_cuentum_path(cuentum) %></td>
+        <td><%= link_to 'Eliminar', cuentum, method: :delete, data: { confirm: '¿Está seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Cuentum', new_cuentum_path %>
+<%= link_to 'Nueva Cuenta', new_cuentum_path %>
