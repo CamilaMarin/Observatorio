@@ -63,6 +63,10 @@ class UsuariosController < ApplicationController
     @tweets = Tweet.select("*").where(:id_usuario => @usuario.id_usuario)
     @tweets.each do |tweet|
       tweet.destroy
+      @actor_tweets = ActorTweet.select("*").where(:id_tweet => tweet.id_tweet)
+      @actor_tweets.each do |actor_tweet|
+        actor_tweet.destroy
+      end
     end
     @usuario.destroy
     respond_to do |format|
