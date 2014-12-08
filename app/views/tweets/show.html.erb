@@ -1,3 +1,4 @@
+<h2>Tweet</h2>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -29,6 +30,34 @@
   <strong>Clasificacion:</strong>
   <%= @tweet.clasificacion %>
 </p>
+<p> <%= link_to 'Editar', edit_usuario_tweet_path(@usuario,@tweet) %> |
+    <%= link_to 'Eliminar', usuario_tweet_path(@usuario,@tweet),:confirm => "¿Seguro desea eliminar este tweet?", :method => :delete%> |
+    <%= link_to "Atras", usuario_path(@usuario) %>
+</p>
+<hr />
+<ul style="list-style: none; padding: 0px;">
+<h2>Actor-Tweets</h2>
+   <% @actor_tweets.each do |actor_tweet| %>
+   <li>
 
-<%= link_to 'Editar', edit_tweet_path(@tweet) %> |
-<%= link_to 'Atras', tweets_path %>
+    <p>
+      <strong>Id at:</strong>
+      <%= actor_tweet.id_at %>
+    </p>
+
+    <p>
+      <strong>Id actor:</strong>
+      <%= actor_tweet.id_actor %>
+    </p>
+
+    <p>
+      <strong>Id tweet:</strong>
+      <%= actor_tweet.id_tweet %>
+    </p>
+
+    <%= link_to 'Ver', usuario_tweet_actor_tweet_path(@usuario , @tweet , actor_tweet) %> 
+      
+   </li>
+ <% end %>
+ </ul>
+

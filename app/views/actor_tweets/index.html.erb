@@ -16,9 +16,7 @@
         <td><%= actor_tweet.id_at %></td>
         <td><%= actor_tweet.id_actor %></td>
         <td><%= actor_tweet.id_tweet %></td>
-        <td><%= link_to 'Ver', actor_tweet %></td>
-        <td><%= link_to 'Editar', edit_actor_tweet_path(actor_tweet) %></td>
-        <td><%= link_to 'Eliminar', actor_tweet, method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+        
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +24,4 @@
 
 <br>
 
-<%= link_to 'Nuevo Actor tweet', new_actor_tweet_path %>
+

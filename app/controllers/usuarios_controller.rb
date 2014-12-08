@@ -10,6 +10,8 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1
   # GET /usuarios/1.json
   def show
+    @usuario = Usuario.find(params[:id])
+    @tweets = Tweet.select("id , id_usuario, id_tweet , id_texto , region , fecha , clasificacion").where(:id_usuario => @usuario.id_usuario)
   end
 
   # GET /usuarios/new
@@ -28,7 +30,7 @@ class UsuariosController < ApplicationController
 
     respond_to do |format|
       if @usuario.save
-        format.html { redirect_to @usuario, notice: 'Usuario was successfully created.' }
+        format.html { redirect_to @usuario, notice: 'Usuario creado correctamente.' }
         format.json { render :show, status: :created, location: @usuario }
       else
         format.html { render :new }
@@ -40,9 +42,12 @@ class UsuariosController < ApplicationController
   # PATCH/PUT /usuarios/1
   # PATCH/PUT /usuarios/1.json
   def update
+    @usuario = Usuario.find(params[:id])
+    @tweets = Tweet.select("*").where(:id_usuario => @usuario.id_usuario)
     respond_to do |format|
-      if @usuario.update(usuario_params)
-        format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
+      if @usuario.update(usuario_params) 
+        @tweets.update_all(:id_usuario => @usuario.id_usuario)
+        format.html { redirect_to @usuario, notice: 'Usuario actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @usuario }
       else
         format.html { render :edit }
@@ -54,9 +59,14 @@ class UsuariosController < ApplicationController
   # DELETE /usuarios/1
   # DELETE /usuarios/1.json
   def destroy
+    @usuario = Usuario.find(params[:id])
+    @tweets = Tweet.select("*").where(:id_usuario => @usuario.id_usuario)
+    @tweets.each do |tweet|
+      tweet.destroy
+    end
     @usuario.destroy
     respond_to do |format|
-      format.html { redirect_to usuarios_url, notice: 'Usuario was successfully destroyed.' }
+      format.html { redirect_to usuarios_url, notice: 'Usuario y tweets asociados al usuario eliminados correctamente.' }
       format.json { head :no_content }
     end
   end

@@ -1,3 +1,4 @@
+<h2>Usuario</h2>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -10,5 +11,48 @@
   <%= @usuario.cuenta %>
 </p>
 
-<%= link_to 'Editar', edit_usuario_path(@usuario) %> |
-<%= link_to 'Atras', usuarios_path %>
+<p> <%= link_to "Agregar un tweet", new_usuario_tweet_path(@usuario) %> |
+    <%= link_to 'Editar', edit_usuario_path(@usuario) %> |
+    <%= link_to 'Eliminar', usuario_path(@usuario),:confirm => "¿Seguro desea eliminar este usuario?", :method => :delete%>|
+    <%= link_to "Atras", usuarios_path %>
+</p>
+<hr />
+<ul style="list-style: none; padding: 0px;">
+<h2>Tweets</h2>
+   <% @tweets.each do |tweet| %>
+   <li>
+
+        <strong>Id tweet:</strong>
+        <%= tweet.id_tweet %>
+        </p>
+
+        <p>
+        <strong>Id texto:</strong>
+        <%= tweet.id_texto %>
+        </p>
+
+        <p>
+        <strong>Id usuario:</strong>
+        <%= tweet.id_usuario %>
+        </p>
+
+        <p>
+        <strong>Region:</strong>
+        <%= tweet.region %>
+        </p>
+
+        <p>
+        <strong>Fecha:</strong>
+        <%= tweet.fecha %>
+        </p>
+
+        <p>
+        <strong>Clasificacion:</strong>
+        <%= tweet.clasificacion %>
+        </p>
+        <%= link_to 'Ver', usuario_tweet_path(@usuario,tweet) %> 
+      
+   </li>
+ <% end %>
+</ul>
+

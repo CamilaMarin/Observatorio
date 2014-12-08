@@ -9,18 +9,21 @@ Rails.application.routes.draw do
 
   resources :cuenta
 
-  resources :actor_tweets
 
   resources :actors
 
   get 'welcome/index'
 
-  resources :usuarios
-
-  resources :tweets
+  resources :usuarios do
+    resources :tweets do
+      resources :actor_tweets
+    end
+  end
 
   resources :textos
-
+  resources :tweets
+  
+  resources :actor_tweets
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

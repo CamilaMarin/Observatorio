@@ -10,25 +10,32 @@ class TweetsController < ApplicationController
   # GET /tweets/1
   # GET /tweets/1.json
   def show
+    @usuario = Usuario.find(params[:usuario_id])
+    @tweet = Tweet.find(params[:id])
+    @actor_tweets = ActorTweet.select("*").where(id_tweet: @tweet.id_tweet)
   end
 
   # GET /tweets/new
   def new
-    @tweet = Tweet.new
+    @usuario = Usuario.find(params[:usuario_id])
+    @tweet = Tweet.new(:id_usuario => @usuario.id_usuario)
   end
 
   # GET /tweets/1/edit
   def edit
+    @usuario = Usuario.find(params[:usuario_id]);
+    @tweet = Tweet.find(params[:id]);
   end
 
   # POST /tweets
   # POST /tweets.json
   def create
-    @tweet = Tweet.new(tweet_params)
+    @usuario = Usuario.find(params[:usuario_id])
+    @tweet = Tweet.new(tweet_params, :usuario => @usuario)
 
     respond_to do |format|
       if @tweet.save
-        format.html { redirect_to @tweet, notice: 'Tweet was successfully created.' }
+        format.html { redirect_to @usuario, notice: 'Tweet creado correctamente.' }
         format.json { render :show, status: :created, location: @tweet }
       else
         format.html { render :new }
@@ -40,9 +47,13 @@ class TweetsController < ApplicationController
   # PATCH/PUT /tweets/1
   # PATCH/PUT /tweets/1.json
   def update
+    @usuario = Usuario.find(params[:usuario_id])
+    @tweet = Tweet.find(params[:id]);
+    @actor_tweets = ActorTweet.select("*").where(:id_tweet => @tweet.id_tweet)
     respond_to do |format|
       if @tweet.update(tweet_params)
-        format.html { redirect_to @tweet, notice: 'Tweet was successfully updated.' }
+        @actor_tweets.update_all(:id_tweet => @tweet.id_tweet)
+        format.html { redirect_to @usuario, notice: 'Tweet actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @tweet }
       else
         format.html { render :edit }
@@ -54,9 +65,15 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1
   # DELETE /tweets/1.json
   def destroy
+    @usuario = Usuario.find(params[:usuario_id])
+    @tweet = Tweet.find(params[:id])
     @tweet.destroy
+    @actor_tweets = ActorTweet.select("*").where(:id_tweet => @tweet.id_tweet)
+    @actor_tweets.each do |actor_tweet|
+      actor_tweet.destroy
+    end
     respond_to do |format|
-      format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
+      format.html { redirect_to @usuario, notice: 'El tweet se ha eliminado correctamente' }
       format.json { head :no_content }
     end
   end
@@ -64,7 +81,8 @@ class TweetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet
-      @tweet = Tweet.find(params[:id])
+       @usuario = Usuario.find(params[:usuario_id])
+       @tweet = Tweet.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

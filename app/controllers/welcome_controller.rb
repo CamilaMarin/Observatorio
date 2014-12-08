@@ -15,6 +15,7 @@ class WelcomeController < ApplicationController
     #Seleccion de la columna de los nombres de las palabras claves
     @palabras_clave = @tabla.select("nombre_palabra_clave")
     cont = 0
+    #Se guardan en topics los hashtag y los nombres de las palabras claves
     @topics = []
     @hashtags.each do |h|
       @topics[cont] = h.nombre_hashtag

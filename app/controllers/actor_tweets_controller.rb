@@ -10,25 +10,31 @@ class ActorTweetsController < ApplicationController
   # GET /actor_tweets/1
   # GET /actor_tweets/1.json
   def show
+    @tweet = Tweet.find(params[:tweet_id])
+    @actor_tweet = ActorTweet.find(params[:id])
   end
 
   # GET /actor_tweets/new
   def new
+    @tweet = Tweet.find(params[:tweet_id])
     @actor_tweet = ActorTweet.new
   end
 
   # GET /actor_tweets/1/edit
   def edit
+    @tweet = Tweet.find(params[:tweet_id])
+    @actor_tweet = ActorTweet.find(params[:id])
   end
 
   # POST /actor_tweets
   # POST /actor_tweets.json
   def create
+    @tweet = Tweet.find(params[:tweet_id])
     @actor_tweet = ActorTweet.new(actor_tweet_params)
 
     respond_to do |format|
       if @actor_tweet.save
-        format.html { redirect_to @actor_tweet, notice: 'Actor tweet was successfully created.' }
+        format.html { redirect_to @tweet, notice: 'Actor tweet creado correctamente.' }
         format.json { render :show, status: :created, location: @actor_tweet }
       else
         format.html { render :new }
@@ -40,9 +46,11 @@ class ActorTweetsController < ApplicationController
   # PATCH/PUT /actor_tweets/1
   # PATCH/PUT /actor_tweets/1.json
   def update
+    @tweet = Tweet.find(params[:tweet_id])
+    @actor_tweet = ActorTweet.find(params[:id])
     respond_to do |format|
       if @actor_tweet.update(actor_tweet_params)
-        format.html { redirect_to @actor_tweet, notice: 'Actor tweet was successfully updated.' }
+        format.html { redirect_to @tweet, notice: 'Actor tweet actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @actor_tweet }
       else
         format.html { render :edit }
@@ -56,7 +64,7 @@ class ActorTweetsController < ApplicationController
   def destroy
     @actor_tweet.destroy
     respond_to do |format|
-      format.html { redirect_to actor_tweets_url, notice: 'Actor tweet was successfully destroyed.' }
+      format.html { redirect_to @tweet, notice: 'Actor tweet eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
@@ -64,6 +72,7 @@ class ActorTweetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_actor_tweet
+      @tweet = Tweet.find(params[:tweet_id])
       @actor_tweet = ActorTweet.find(params[:id])
     end
 

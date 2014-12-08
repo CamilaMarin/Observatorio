@@ -22,9 +22,6 @@
         <td><%= tweet.region %></td>
         <td><%= tweet.fecha %></td>
         <td><%= tweet.clasificacion %></td>
-        <td><%= link_to 'Ver', tweet %></td>
-        <td><%= link_to 'Editar', edit_tweet_path(tweet) %></td>
-        <td><%= link_to 'Eliminar', tweet, method: :delete, data: { confirm: '¿Está seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +29,3 @@
 
 <br>
 
-<%= link_to 'Nuevo Tweet', new_tweet_path %>

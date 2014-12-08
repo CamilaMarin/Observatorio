@@ -1,4 +1,4 @@
-<%= form_for(@actor_tweet) do |f| %>
+<%= form_for([@usuario , @tweet , @actor_tweet]) do |f| %>
   <% if @actor_tweet.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@actor_tweet.errors.count, "error") %> prohibited this actor_tweet from being saved:</h2>
@@ -24,6 +24,6 @@
     <%= f.number_field :id_tweet %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enviar"%> <%= link_to "Volver", @tweet %>
   </div>
 <% end %>
