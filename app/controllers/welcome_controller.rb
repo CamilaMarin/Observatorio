@@ -34,6 +34,7 @@ class WelcomeController < ApplicationController
       #Busca tweet asociados a las palabras claves
     	@search = $client.search(t, :include_rts => false, :lang => "es").take(1).collect
   	 	@search.each do |tweets| 
+        contadorCla=0
   		   @texto = Texto.new({id_tweet: tweets.id, id_texto: contador,texto: tweets.text}); 
   		   if Texto.where(id_tweet: @texto.id_tweet).count > 0 #si ya existe el tweet no lo agrega
   		   else
@@ -41,8 +42,6 @@ class WelcomeController < ApplicationController
   			    @texto.save();
             #crea y guarda el id del usuario y el nombre de la cuenta
   			    @usuario = Usuario.create({id_usuario: tweets.user.id, cuenta: tweets.user.name})
-            #crea y guarda el id del tweet, id del texto, id del usuario, la region(si la tiene) y la fecha de cración del tweet
-  			   	@tweet = Tweet.create({id_tweet: tweets.id, id_texto: contador,id_usuario: tweets.user.id, region: tweets.user.location, fecha: tweets.created_at})
             #busca el id del actor asociado al tweet
             @palabras_clave.each do |pl|
               if t == pl.nombre_palabra_clave
@@ -66,8 +65,11 @@ class WelcomeController < ApplicationController
               if arreglo_texto.index t1.nombre_palabra
                 @palabra_bolsa=TextoPalabra.create({id_tp: contador1, id_texto: contador, id_palabrab: t1.id_palabrab})
                 contador1+=1
+                contadorCla+=t1.puntaje
               end
             end
+             #crea y guarda el id del tweet, id del texto, id del usuario, la region(si la tiene) y la fecha de cración del tweet
+            @tweet = Tweet.create({id_tweet: tweets.id, id_texto: contador,id_usuario: tweets.user.id, region: tweets.user.location, fecha: tweets.created_at, clasificacion: contadorCla})
   		   		contador += 1
   		    end
   		end
