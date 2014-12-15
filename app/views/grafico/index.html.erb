@@ -1,0 +1,111 @@
+<h1>Estadísticas</h1>
+<head>
+	<% @tabla = Actor.all() %>
+    <% $nombres = [] %>
+    <% $cantidad = [] %>
+    <% contador =0%>
+    <% @tabla.each do |t| %>
+		<% $nombres[contador]= t.nombre_actor %>
+		<% $cantidad[contador]= ActorTweet.where(id_actor: t.id_actor).count() %>
+		<% contador +=1%>
+	<% end %>
+	<% contador =0%>
+	<h3><%= "Actores ordenados según cantidad de reclamos"%></h3>
+	<% todo= []%>
+	<%if $cantidad[0]>$cantidad[1] and $cantidad[0]>$cantidad[2]%>
+		<td><%= "Nombre del actor " %><%= $nombres[0] %><%=" Cantidad de reclamos " %><%= $cantidad[0] %></td><br>
+		<%todo[0]=[$nombres[0],$cantidad[0]]%>
+		<%if $cantidad[1]>$cantidad[2]%>
+		<th><%= "Nombre del actor " %><%= $nombres[1] %><%= " Cantidad de reclamos " %><%= $cantidad[1]%></th><br>
+		<th><%= "Nombre del actor " %><%= $nombres[2] %><%= " Cantidad de reclamos " %><%= $cantidad[2]%></th><br>
+			<%todo[1]=[$nombres[1],$cantidad[1]]%>
+			<%todo[2]=[$nombres[2],$cantidad[2]]%>
+		<%else%>
+		<th><%= "Nombre del actor " %><%= $nombres[2] %><%= " Cantidad de reclamos " %><%= $cantidad[2]%></th><br>
+		<th><%= "Nombre del actor " %><%= $nombres[1] %><%= " Cantidad de reclamos " %><%= $cantidad[1]%></th><br>
+			<%todo[1]=[$nombres[2],$cantidad[2]]%>
+			<%todo[2]=[$nombres[1],$cantidad[1]]%>
+		<%end%>
+	<%end%>
+	<%if $cantidad[1]>$cantidad[0] and $cantidad[1]>$cantidad[2]%>
+		<th><%= "Nombre del actor " %><%= $nombres[1] %><%= " Cantidad de reclamos " %><%= $cantidad[1]%></th><br>
+		<%todo[0]=[$nombres[1],$cantidad[1]]%>
+		<%if $cantidad[0]>$cantidad[2]%>
+		<th><%= "Nombre del actor " %><%= $nombres[0] %><%= " Cantidad de reclamos " %><%= $cantidad[0]%></th><br>
+		<th><%= "Nombre del actor " %><%= $nombres[2] %><%= " Cantidad de reclamos " %><%= $cantidad[2]%></th><br>
+			<%todo[1]=[$nombres[0],$cantidad[0]]%>
+			<%todo[2]=[$nombres[2],$cantidad[2]]%>
+		<%else%>
+		<th><%= "Nombre del actor " %><%= $nombres[2] %><%= " Cantidad de reclamos " %><%= $cantidad[2]%></th><br>
+		<th><%= "Nombre del actor " %><%= $nombres[0] %><%= " Cantidad de reclamos " %><%= $cantidad[0]%></th><br>
+			<%todo[1]=[$nombres[2],$cantidad[2]]%>
+			<%todo[2]=[$nombres[0],$cantidad[0]]%>
+		<%end%>
+	<%end%>
+	<%if $cantidad[2]>$cantidad[1] and $cantidad[2]>$cantidad[0]%>
+		<th><%= "Nombre del actor " %><%= nombres[2] %><%= " Cantidad de reclamos " %><%= cantidad[2]%></th><br>
+		<%todo[0]=[$nombres[2],$cantidad[2]]%>
+		<%if $cantidad[1]>$cantidad[0]%>
+		<th><%= "Nombre del actor " %><%= $nombres[1] %><%= " Cantidad de reclamos " %><%= $cantidad[1]%></th><br>
+		<th><%= "Nombre del actor " %><%= $nombres[0] %><%= " Cantidad de reclamos " %><%= $cantidad[0]%></th><br>
+			<%todo[1]=[$nombres[1],$cantidad[1]]%>
+			<%todo[2]=[$nombres[0],$cantidad[0]]%>
+		<%else%>
+		<th><%= "Nombre del actor " %><%= $nombres[0] %><%= " Cantidad de reclamos " %><%= $cantidad[0]%></th><br>
+		<th><%= "Nombre del actor " %><%= $nombres[1] %><%= " Cantidad de reclamos " %><%= $cantidad[1]%></th><br>
+			<%todo[1]=[$nombres[0],$cantidad[0]]%>
+			<%todo[2]=[$nombres[1],$cantidad[1]]%>
+		<%end%>
+	<%end%>
+
+<h3><%= "10 reclamos peor clasificados"%></h3><br>
+	<% @tabla1 = Tweet.all().order("clasificacion").limit(10) %>
+    <% @tabla1.each do |t| %>
+    	<br>
+		<% @usuario = Usuario.select("cuenta").where(id_usuario: t.id_usuario) %>
+		<% @usuario.each do |user|%>
+			<%= user.cuenta%>
+		<% end %>
+		<%=		t.region %><br>
+		<%if t.clasificacion=0%>
+			<%= " Clasificacion: Negativo "%>
+		<%elsif t.clasificacion>0 and t.clasificacion<4%>
+			<%= " Clasificacion: Muy Negativo "%>
+		<%else%>
+			<%= " Clasificacion: Extremadamente Negativo "%>
+		<%end%>
+		<% @text= Texto.select("texto").where(id_texto: t.id_texto)%><br>
+		<% @text.each do |texto|%>
+			<%= texto.texto%>
+		<% end %>
+		<hr>
+	<% end %>
+<h3><%= "Usuario con mayor cantidad de reclamos"%></h3><br>
+
+
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script type="text/javascript">
+ /*     google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var datos = new google.visualization.DataTable();
+            datos.addColumn('string', 'Actor');
+            datos.addColumn('number', 'Tweets');
+			dato = [$nombres[0],$cantidad];
+			datos.addRows([dato]);
+          //  datos.addRows([dato]);
+
+        var options = {
+          title: 'My Daily Activities',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(datos, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+  </body>
