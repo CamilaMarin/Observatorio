@@ -17,3 +17,32 @@
 
 <%= link_to 'Editar', edit_palabra_bolsa_path(@palabra_bolsa) %> |
 <%= link_to 'Atras', palabra_bolsas_path %>
+
+<hr />
+<h1>Tabla Texto Palabras</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id tp</th>
+      <th>Id texto</th>
+      <th>Id palabrab</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @texto_palabras.each do |texto_palabra| %>
+      <tr>
+        <td><%= texto_palabra.id_tp %></td>
+        <td><%= texto_palabra.id_texto %></td>
+        <td><%= texto_palabra.id_palabrab %></td>
+        <td><%= link_to 'Ver', palabra_bolsa_texto_palabra_path(@palabra_bolsa,texto_palabra) %></td>
+        <td><%= link_to 'Editar', edit_palabra_bolsa_texto_palabra_path(@palabra_bolsa,texto_palabra) %></td>
+        <td><%= link_to 'Eliminar', palabra_bolsa_texto_palabra_path(@palabra_bolsa,texto_palabra), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
