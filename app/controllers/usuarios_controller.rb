@@ -68,6 +68,14 @@ class UsuariosController < ApplicationController
       @actor_tweets.each do |actor_tweet|
         actor_tweet.destroy
       end
+      @textos = Texto.select("*").where(:id_tweet => tweet.id_tweet)
+      @textos.each do |text|
+        @texto_palabras = TextoPalabra.select("*").where(id_texto: @texto.id_texto)
+        @texto_palabras.each do |tp|
+          tp.destroy
+        end
+        text.destroy
+      end
     end
     @usuario.destroy
     respond_to do |format|
