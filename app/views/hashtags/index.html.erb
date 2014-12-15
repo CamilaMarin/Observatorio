@@ -16,9 +16,6 @@
         <td><%= hashtag.id_hashtag %></td>
         <td><%= hashtag.id_actor %></td>
         <td><%= hashtag.nombre_hashtag %></td>
-        <td><%= link_to 'Ver', hashtag %></td>
-        <td><%= link_to 'Editar', edit_hashtag_path(hashtag) %></td>
-        <td><%= link_to 'Eliminar', hashtag, method: :delete, data: { confirm: '¿Está seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +23,3 @@
 
 <br>
 
-<%= link_to 'Nuevo Hashtag', new_hashtag_path %>

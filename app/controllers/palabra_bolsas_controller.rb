@@ -10,6 +10,8 @@ class PalabraBolsasController < ApplicationController
   # GET /palabra_bolsas/1
   # GET /palabra_bolsas/1.json
   def show
+    @palabra_bolsa = PalabraBolsa.find(params[:id])
+    @texto_palabras = TextoPalabra.select("*").where(id_palabrab: @palabra_bolsa.id_palabrab)
   end
 
   # GET /palabra_bolsas/new
@@ -40,8 +42,11 @@ class PalabraBolsasController < ApplicationController
   # PATCH/PUT /palabra_bolsas/1
   # PATCH/PUT /palabra_bolsas/1.json
   def update
+    @palabra_bolsa = PalabraBolsa.find(params[:id])
+    @texto_palabras = TextoPalabra.select("*").where(id_palabrab: @palabra_bolsa.id_palabrab)
     respond_to do |format|
       if @palabra_bolsa.update(palabra_bolsa_params)
+        @texto_palabras.update_all(id_palabrab: @palabra_bolsa.id_palabrab)
         format.html { redirect_to @palabra_bolsa, notice: 'Palabra bolsa was successfully updated.' }
         format.json { render :show, status: :ok, location: @palabra_bolsa }
       else
@@ -54,6 +59,11 @@ class PalabraBolsasController < ApplicationController
   # DELETE /palabra_bolsas/1
   # DELETE /palabra_bolsas/1.json
   def destroy
+    @palabra_bolsa = PalabraBolsa.find(params[:id])
+    @texto_palabras = TextoPalabra.select("*").where(id_palabrab: @palabra_bolsa.id_palabrab)
+    @texto_palabras.each do |texto_palabra|
+      texto_palabra.destroy
+    end
     @palabra_bolsa.destroy
     respond_to do |format|
       format.html { redirect_to palabra_bolsas_url, notice: 'Palabra bolsa was successfully destroyed.' }

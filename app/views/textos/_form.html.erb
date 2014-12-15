@@ -1,4 +1,4 @@
-<%= form_for(@texto) do |f| %>
+<%= form_for([@usuario,@tweet,@texto]) do |f| %>
   <% if @texto.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@texto.errors.count, "error") %> prohibited this texto from being saved:</h2>
@@ -24,6 +24,6 @@
     <%= f.text_area :texto %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enviar"%> <%= link_to "Atras", @tweet %>
   </div>
 <% end %>

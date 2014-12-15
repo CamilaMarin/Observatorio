@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h1>Actor</h1>
 <p>
   <strong>Id actor:</strong>
   <%= @actor.id_actor %>
@@ -11,4 +11,118 @@
 </p>
 
 <%= link_to 'Editar', edit_actor_path(@actor) %> |
-<%= link_to 'Atras', actors_path %>
+<%= link_to 'Atras', actors_path %> |
+<%= link_to 'Eliminar', actor_path(@actor),:confirm => "¿Seguro desea eliminar este tweet?", :method => :delete%>
+<hr />
+<h3>Tabla Actor - Tweets</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id at</th>
+      <th>Id actor</th>
+      <th>Id tweet</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @actor_tweets.each do |actor_tweet| %>
+      <tr>
+        <td><%= actor_tweet.id_at %></td>
+        <td><%= actor_tweet.id_actor %></td>
+        <td><%= actor_tweet.id_tweet %></td>
+        <td>    | <%= link_to 'Ver', actor_actor_tweet_path(@actor , actor_tweet) %> | </td> 
+        <td><%= link_to 'Editar', edit_actor_actor_tweet_path(@actor , actor_tweet) %> | </td>
+        <td><%= link_to 'Eliminar', actor_actor_tweet_path(@actor , actor_tweet), method: :delete, data: { confirm: '¿Está seguro?' } %> |</td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<hr />
+<h3>Tabla Hashtag</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id hashtag</th>
+      <th>Id actor</th>
+      <th>Nombre hashtag</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hashtags.each do |hashtag| %>
+      <tr>
+        <td><%= hashtag.id_hashtag %></td>
+        <td><%= hashtag.id_actor %></td>
+        <td><%= hashtag.nombre_hashtag %></td>
+        <td>    | <%= link_to 'Ver', actor_hashtag_path(@actor , hashtag) %> | </td>
+        <td><%= link_to 'Editar', edit_actor_hashtag_path(@actor , hashtag) %> | </td>
+        <td><%= link_to 'Eliminar', actor_hashtag_path(@actor , hashtag), method: :delete, data: { confirm: '¿Está seguro?' } %> |</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<hr />
+<h3>Tabla Cuenta</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id cuenta</th>
+      <th>Id actor</th>
+      <th>Nombre cuenta</th>
+      <th>Cantidad seguidores</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cuentas.each do |cuenta| %>
+      <tr>
+        <td><%= cuenta.id_cuenta %></td>
+        <td><%= cuenta.id_actor %></td>
+        <td><%= cuenta.nombre_cuenta %></td>
+        <td><%= cuenta.cantidad_seguidores %></td>
+        <td>    | <%= link_to 'Ver', actor_cuenta_path(@actor, cuenta) %> | </td>
+        <td><%= link_to 'Editar', edit_actor_cuentum_path(@actor,cuenta) %> | </td>
+        <td><%= link_to 'Eliminar', actor_cuentum_path(@actor ,cuenta), method: :delete, data: { confirm: '¿Está seguro?' } %> |</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<hr />
+<h3>Tabla Palabra Clave</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id palabra</th>
+      <th>Id actor</th>
+      <th>Nombre palabra clave</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @palabra_claves.each do |palabra_clave| %>
+      <tr>
+        <td><%= palabra_clave.id_palabra %></td>
+        <td><%= palabra_clave.id_actor %></td>
+        <td><%= palabra_clave.nombre_palabra_clave %></td>
+        <td>    | <%= link_to 'Ver', actor_palabra_clafe_path(@actor, palabra_clave) %> | </td>
+        <td><%= link_to 'Editar', edit_actor_palabra_clafe_path(@actor , palabra_clave) %> | </td>
+        <td><%= link_to 'Eliminar', actor_palabra_clafe_path(@actor, palabra_clave), method: :delete, data: { confirm: '¿Está seguro?' } %> | </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

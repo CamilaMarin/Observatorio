@@ -1,4 +1,4 @@
-<%= form_for(@cuentum) do |f| %>
+<%= form_for([@actor , @cuentum]) do |f| %>
   <% if @cuentum.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@cuentum.errors.count, "error") %> prohibited this cuentum from being saved:</h2>
@@ -28,6 +28,6 @@
     <%= f.text_field :cantidad_seguidores %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit"Enviar"%> <%= link_to "Volver", @actor %>
   </div>
 <% end %>

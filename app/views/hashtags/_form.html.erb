@@ -1,4 +1,4 @@
-<%= form_for(@hashtag) do |f| %>
+<%= form_for([@actor , @hashtag]) do |f| %>
   <% if @hashtag.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@hashtag.errors.count, "error") %> prohibited this hashtag from being saved:</h2>
@@ -24,6 +24,6 @@
     <%= f.text_field :nombre_hashtag %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enviar"%> <%= link_to "Volver", @actor %>
   </div>
 <% end %>

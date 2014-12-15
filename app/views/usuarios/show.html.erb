@@ -17,42 +17,36 @@
     <%= link_to "Atras", usuarios_path %>
 </p>
 <hr />
-<ul style="list-style: none; padding: 0px;">
-<h2>Tweets</h2>
-   <% @tweets.each do |tweet| %>
-   <li>
+<h3>Tabla Tweets</h3>
 
-        <strong>Id tweet:</strong>
-        <%= tweet.id_tweet %>
-        </p>
+<table>
+  <thead>
+    <tr>
+      <th>Id tweet</th>
+      <th>Id texto</th>
+      <th>Id usuario</th>
+      <th>Region</th>
+      <th>Fecha</th>
+      <th>Clasificacion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-        <p>
-        <strong>Id texto:</strong>
-        <%= tweet.id_texto %>
-        </p>
+  <tbody>
+    <% @tweets.each do |tweet| %>
+      <tr>
+        <td><%= tweet.id_tweet %></td>
+        <td><%= tweet.id_texto %></td>
+        <td><%= tweet.id_usuario %></td>
+        <td><%= tweet.region %></td>
+        <td><%= tweet.fecha %></td>
+        <td><%= tweet.clasificacion %></td>
+        <td>    | <%= link_to 'Ver', usuario_tweet_path(@usuario, tweet) %> | </td> 
+        <td><%= link_to 'Editar', edit_usuario_tweet_path(@usuario , tweet) %> | </td>
+        <td><%= link_to 'Eliminar', usuario_tweet_path(@usuario , tweet), method: :delete, data: { confirm: '¿Está seguro?' } %> |</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-        <p>
-        <strong>Id usuario:</strong>
-        <%= tweet.id_usuario %>
-        </p>
-
-        <p>
-        <strong>Region:</strong>
-        <%= tweet.region %>
-        </p>
-
-        <p>
-        <strong>Fecha:</strong>
-        <%= tweet.fecha %>
-        </p>
-
-        <p>
-        <strong>Clasificacion:</strong>
-        <%= tweet.clasificacion %>
-        </p>
-        <%= link_to 'Ver', usuario_tweet_path(@usuario,tweet) %> 
-      
-   </li>
- <% end %>
-</ul>
-
+<br>

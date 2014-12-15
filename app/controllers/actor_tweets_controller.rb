@@ -10,35 +10,64 @@ class ActorTweetsController < ApplicationController
   # GET /actor_tweets/1
   # GET /actor_tweets/1.json
   def show
-    @tweet = Tweet.find(params[:tweet_id])
+    if params == [:tweet_id,:id]
+      @tweet = Tweet.find(params[:tweet_id])
+    end
+    if params == [:actor_id,:id]
+      @actors = Actor.find(params[:actor_id])
+    end
     @actor_tweet = ActorTweet.find(params[:id])
   end
 
   # GET /actor_tweets/new
   def new
-    @tweet = Tweet.find(params[:tweet_id])
+    if params == [:tweet_id,:id]
+      @tweet = Tweet.find(params[:tweet_id])
+    end
+    if params == [:actor_id,:id]
+      @actors = Actor.find(params[:actor_id])
+    end
     @actor_tweet = ActorTweet.new
   end
 
   # GET /actor_tweets/1/edit
   def edit
-    @tweet = Tweet.find(params[:tweet_id])
+    if params == [:tweet_id,:id]
+      @tweet = Tweet.find(params[:tweet_id])
+    end
+    if params == [:actor_id,:id]
+      @actors = Actor.find(params[:actor_id])
+    end
     @actor_tweet = ActorTweet.find(params[:id])
   end
 
   # POST /actor_tweets
   # POST /actor_tweets.json
   def create
-    @tweet = Tweet.find(params[:tweet_id])
-    @actor_tweet = ActorTweet.new(actor_tweet_params)
-
-    respond_to do |format|
-      if @actor_tweet.save
-        format.html { redirect_to @tweet, notice: 'Actor tweet creado correctamente.' }
-        format.json { render :show, status: :created, location: @actor_tweet }
-      else
-        format.html { render :new }
-        format.json { render json: @actor_tweet.errors, status: :unprocessable_entity }
+    if params == [:tweet_id,:id]
+      @tweet = Tweet.find(params[:tweet_id])
+      @actor_tweet = ActorTweet.new(actor_tweet_params)
+      respond_to do |format|
+        if @actor_tweet.save
+          format.html { redirect_to @actor_tweets, notice: 'Actor tweet creado correctamente.' }
+          format.json { render :show, status: :created, location: @actor_tweet }
+        else
+          format.html { render :new }
+          format.json { render json: @actor_tweet.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+    if params == [:actor_id,:id]
+      @actors = Actor.find(params[:actor_id])
+      @actor_tweet = ActorTweet.new(actor_tweet_params)
+      respond_to do |format|
+        if @actor_tweet.save
+          format.html { redirect_to @actor_tweets, notice: 'Actor tweet creado correctamente.' }
+          format.json { render :show, status: :created, location: @actor_tweet }
+        else
+          format.html { render :new }
+          format.json { render json: @actor_tweet.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -46,17 +75,33 @@ class ActorTweetsController < ApplicationController
   # PATCH/PUT /actor_tweets/1
   # PATCH/PUT /actor_tweets/1.json
   def update
-    @tweet = Tweet.find(params[:tweet_id])
-    @actor_tweet = ActorTweet.find(params[:id])
-    respond_to do |format|
-      if @actor_tweet.update(actor_tweet_params)
-        format.html { redirect_to @tweet, notice: 'Actor tweet actualizado correctamente.' }
-        format.json { render :show, status: :ok, location: @actor_tweet }
-      else
-        format.html { render :edit }
-        format.json { render json: @actor_tweet.errors, status: :unprocessable_entity }
+    if params == [:tweet_id,:id]
+      @tweet = Tweet.find(params[:tweet_id])
+      @actor_tweet = ActorTweet.find(params[:id])
+      respond_to do |format|
+        if @actor_tweet.update(actor_tweet_params)
+          format.html { redirect_to @actor_tweets, notice: 'Actor tweet actualizado correctamente.' }
+          format.json { render :show, status: :ok, location: @actor_tweet }
+        else
+          format.html { render :edit }
+          format.json { render json: @actor_tweet.errors, status: :unprocessable_entity }
+        end
       end
     end
+    if params == [:actor_id,:id]
+      @actors = Actor.find(params[:actor_id])
+      @actor_tweet = ActorTweet.find(params[:id])
+      respond_to do |format|
+        if @actor_tweet.update(actor_tweet_params)
+          format.html { redirect_to @actor_tweets, notice: 'Actor tweet actualizado correctamente.' }
+          format.json { render :show, status: :ok, location: @actor_tweet }
+        else
+          format.html { render :edit }
+          format.json { render json: @actor_tweet.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
   end
 
   # DELETE /actor_tweets/1
@@ -72,7 +117,12 @@ class ActorTweetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_actor_tweet
-      @tweet = Tweet.find(params[:tweet_id])
+      if params == [:tweet_id,:id]
+        @tweet = Tweet.find(params[:tweet_id])
+      end
+      if params == [:actor_id,:id]
+        @actors = Actor.find(params[:actor_id])
+      end
       @actor_tweet = ActorTweet.find(params[:id])
     end
 

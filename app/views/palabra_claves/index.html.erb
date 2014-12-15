@@ -16,9 +16,7 @@
         <td><%= palabra_clafe.id_palabra %></td>
         <td><%= palabra_clafe.id_actor %></td>
         <td><%= palabra_clafe.nombre_palabra_clave %></td>
-        <td><%= link_to 'Ver', palabra_clafe %></td>
-        <td><%= link_to 'Editar', edit_palabra_clafe_path(palabra_clafe) %></td>
-        <td><%= link_to 'Eliminar', palabra_clafe, method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+       </td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +24,3 @@
 
 <br>
 
-<%= link_to 'Nueva Palabra clave', new_palabra_clafe_path %>

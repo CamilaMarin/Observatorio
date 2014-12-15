@@ -59,6 +59,7 @@ class UsuariosController < ApplicationController
   # DELETE /usuarios/1
   # DELETE /usuarios/1.json
   def destroy
+    #Si elimino el Usuario-> se eliminan todos los tweets y los actor_tweet asociados a este
     @usuario = Usuario.find(params[:id])
     @tweets = Tweet.select("*").where(:id_usuario => @usuario.id_usuario)
     @tweets.each do |tweet|

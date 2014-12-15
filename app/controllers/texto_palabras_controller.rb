@@ -10,25 +10,58 @@ class TextoPalabrasController < ApplicationController
   # GET /texto_palabras/1
   # GET /texto_palabras/1.json
   def show
+    if params == [:usuario_id,:tweet_id,:texto_id,:id]
+      @usuario = Usuario.find(params[:usuario_id])
+      @tweet = Tweet.find(params[:tweet_id])
+      @textos = Texto.find(params[:texto_id])
+    end
+    if params == [:palabra_bolsa_id,:id]
+      @palabra_bolsa = PalabraBolsa.find(params[:palabra_bolsa_id])
+    end
+    @texto_palabras = TextoPalabra.find(params[:id])
   end
 
   # GET /texto_palabras/new
   def new
-    @texto_palabra = TextoPalabra.new
+    if params == [:usuario_id,:tweet_id,:texto_id,:id]
+      @usuario = Usuario.find(params[:usuario_id])
+      @tweet = Tweet.find(params[:tweet_id])
+      @textos = Texto.find(params[:texto_id])
+    end
+    if params == [:palabra_bolsa_id,:id]
+      @palabra_bolsa = PalabraBolsa.find(params[:palabra_bolsa_id])
+    end
+    @texto_palabra = TextoPalabra.new(:id_texto => @textos.id_texto)
   end
 
   # GET /texto_palabras/1/edit
-  def edit
+  def edit  
+    if params == [:usuario_id,:tweet_id,:texto_id,:id]
+      @usuario = Usuario.find(params[:usuario_id])
+      @tweet = Tweet.find(params[:tweet_id])
+      @textos = Texto.find(params[:texto_id])
+    end
+    if params == [:palabra_bolsa_id,:id]
+      @palabra_bolsa = PalabraBolsa.find(params[:palabra_bolsa_id])
+    end
+    @texto_palabras = TextoPalabra.find(params[:id])
   end
 
   # POST /texto_palabras
   # POST /texto_palabras.json
   def create
-    @texto_palabra = TextoPalabra.new(texto_palabra_params)
-
+    if params == [:usuario_id,:tweet_id,:texto_id,:id]
+      @usuario = Usuario.find(params[:usuario_id])
+      @tweet = Tweet.find(params[:tweet_id])
+      @textos = Texto.find(params[:texto_id])
+    end
+    if params == [:palabra_bolsa_id,:id]
+      @palabra_bolsa = PalabraBolsa.find(params[:palabra_bolsa_id])
+    end
+    @texto_palabra = TextoPalabra.new(texto_palabra_params, :id_texto => @textos.id_texto)
     respond_to do |format|
       if @texto_palabra.save
-        format.html { redirect_to @texto_palabra, notice: 'Texto palabra was successfully created.' }
+        format.html { redirect_to @texto_palabras, notice: 'Texto palabra was successfully created.' }
         format.json { render :show, status: :created, location: @texto_palabra }
       else
         format.html { render :new }
@@ -40,9 +73,18 @@ class TextoPalabrasController < ApplicationController
   # PATCH/PUT /texto_palabras/1
   # PATCH/PUT /texto_palabras/1.json
   def update
+    if params == [:usuario_id,:tweet_id,:texto_id,:id]
+      @usuario = Usuario.find(params[:usuario_id])
+      @tweet = Tweet.find(params[:tweet_id])
+      @textos = Texto.find(params[:texto_id])
+    end
+    if params == [:palabra_bolsa_id,:id]
+      @palabra_bolsa = PalabraBolsa.find(params[:palabra_bolsa_id])
+    end
+    @texto_palabra = TextoPalabra.find(params[:id])
     respond_to do |format|
       if @texto_palabra.update(texto_palabra_params)
-        format.html { redirect_to @texto_palabra, notice: 'Texto palabra was successfully updated.' }
+        format.html { redirect_to @texto_palabras, notice: 'Texto palabra was successfully updated.' }
         format.json { render :show, status: :ok, location: @texto_palabra }
       else
         format.html { render :edit }
@@ -54,9 +96,18 @@ class TextoPalabrasController < ApplicationController
   # DELETE /texto_palabras/1
   # DELETE /texto_palabras/1.json
   def destroy
+    if params == [:usuario_id,:tweet_id,:texto_id,:id]
+      @usuario = Usuario.find(params[:usuario_id])
+      @tweet = Tweet.find(params[:tweet_id])
+      @textos = Texto.find(params[:texto_id])
+    end
+    if params == [:palabra_bolsa_id,:id]
+      @palabra_bolsa = PalabraBolsa.find(params[:palabra_bolsa_id])
+    end
+    @texto_palabra = TextoPalabra.find(params[:id])
     @texto_palabra.destroy
     respond_to do |format|
-      format.html { redirect_to texto_palabras_url, notice: 'Texto palabra was successfully destroyed.' }
+      format.html { redirect_to @texto_palabras, notice: 'Texto palabra was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,6 +115,14 @@ class TextoPalabrasController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_texto_palabra
+    if params == [:usuario_id,:tweet_id,:texto_id,:id]
+      @usuario = Usuario.find(params[:usuario_id])
+      @tweet = Tweet.find(params[:tweet_id])
+      @textos = Texto.find(params[:texto_id])
+    end
+    if params == [:palabra_bolsa_id,:id]
+      @palabra_bolsa = PalabraBolsa.find(params[:palabra_bolsa_id])
+    end
       @texto_palabra = TextoPalabra.find(params[:id])
     end
 

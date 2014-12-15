@@ -1,22 +1,23 @@
 Rails.application.routes.draw do
-  resources :texto_palabras
 
-  resources :palabra_claves
-
-  resources :palabra_bolsas
-
-  resources :hashtags
-
-  resources :cuenta
-
-
-  resources :actors
+  resources :palabra_bolsas do
+    resources :texto_palabras
+  end
+  resources :actors do
+    resources :actor_tweets
+    resources :hashtags
+    resources :cuenta
+    resources :palabra_claves
+  end
 
   get 'welcome/index'
 
   resources :usuarios do
     resources :tweets do
       resources :actor_tweets
+      resources :textos do
+        resources :texto_palabras
+      end
     end
   end
 
@@ -24,7 +25,11 @@ Rails.application.routes.draw do
   resources :tweets
   
   resources :actor_tweets
+  resources :hashtags  
+  resources :cuenta
+  resources :palabra_claves
 
+  resources :texto_palabras
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

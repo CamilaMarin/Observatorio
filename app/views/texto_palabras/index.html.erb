@@ -16,14 +16,9 @@
         <td><%= texto_palabra.id_tp %></td>
         <td><%= texto_palabra.id_texto %></td>
         <td><%= texto_palabra.id_palabrab %></td>
-        <td><%= link_to 'Ver', texto_palabra %></td>
-        <td><%= link_to 'Editar', edit_texto_palabra_path(texto_palabra) %></td>
-        <td><%= link_to 'Eliminar', texto_palabra, method: :delete, data: { confirm: '¿Está seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'Nuevo Texto palabra', new_texto_palabra_path %>

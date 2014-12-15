@@ -35,29 +35,59 @@
     <%= link_to "Atras", usuario_path(@usuario) %>
 </p>
 <hr />
-<ul style="list-style: none; padding: 0px;">
-<h2>Actor-Tweets</h2>
-   <% @actor_tweets.each do |actor_tweet| %>
-   <li>
+<h3>Tabla Actor - Tweets</h3>
 
-    <p>
-      <strong>Id at:</strong>
-      <%= actor_tweet.id_at %>
-    </p>
+<table>
+  <thead>
+    <tr>
+      <th>Id at</th>
+      <th>Id actor</th>
+      <th>Id tweet</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-    <p>
-      <strong>Id actor:</strong>
-      <%= actor_tweet.id_actor %>
-    </p>
+  <tbody>
+    <% @actor_tweets.each do |actor_tweet| %>
+      <tr>
+        <td><%= actor_tweet.id_at %></td>
+        <td><%= actor_tweet.id_actor %></td>
+        <td><%= actor_tweet.id_tweet %></td>
+        <td>    | <%= link_to 'Ver', usuario_tweet_actor_tweet_path(@usuario, @tweet , actor_tweet) %> | </td> 
+        <td><%= link_to 'Editar', edit_usuario_tweet_actor_tweet_path(@usuario , @tweet , actor_tweet) %> | </td>
+        <td><%= link_to 'Eliminar', usuario_tweet_actor_tweet_path(@usuario , @tweet , actor_tweet), method: :delete, data: { confirm: '¿Está seguro?' } %> |</td>
 
-    <p>
-      <strong>Id tweet:</strong>
-      <%= actor_tweet.id_tweet %>
-    </p>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<hr />
+<h1>Tabla Textos</h1>
 
-    <%= link_to 'Ver', usuario_tweet_actor_tweet_path(@usuario , @tweet , actor_tweet) %> 
-      
-   </li>
- <% end %>
- </ul>
+<table>
+  <thead>
+    <tr>
+      <th>Id tweet</th>
+      <th>Id texto</th>
+      <th>Texto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @textos.each do |texto| %>
+      <tr>
+        <td><%= texto.id_tweet %></td>
+        <td><%= texto.id_texto %></td>
+        <td><%= texto.texto %></td>
+        <td>|<%= link_to 'Ver', usuario_tweet_texto_path(@usuario, @tweet , texto) %>|</td> 
+        <td><%= link_to 'Editar', edit_usuario_tweet_texto_path(@usuario , @tweet , texto) %>|</td>
+        <td><%= link_to 'Eliminar', usuario_tweet_texto_path(@usuario , @tweet , texto), method: :delete, data: { confirm: '¿Está seguro?' } %>|</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
 

@@ -1,4 +1,4 @@
-class TweetsController < ApplicationController
+              class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
   # GET /tweets
@@ -10,9 +10,11 @@ class TweetsController < ApplicationController
   # GET /tweets/1
   # GET /tweets/1.json
   def show
+    #Se muestra el tweet y los actor_tweet asociados a este
     @usuario = Usuario.find(params[:usuario_id])
     @tweet = Tweet.find(params[:id])
     @actor_tweets = ActorTweet.select("*").where(id_tweet: @tweet.id_tweet)
+    @textos = Texto.select("*").where(id_tweet: @tweet.id_tweet)
   end
 
   # GET /tweets/new
@@ -32,7 +34,6 @@ class TweetsController < ApplicationController
   def create
     @usuario = Usuario.find(params[:usuario_id])
     @tweet = Tweet.new(tweet_params, :usuario => @usuario)
-
     respond_to do |format|
       if @tweet.save
         format.html { redirect_to @usuario, notice: 'Tweet creado correctamente.' }
@@ -47,12 +48,15 @@ class TweetsController < ApplicationController
   # PATCH/PUT /tweets/1
   # PATCH/PUT /tweets/1.json
   def update
+    #Si actualizo el id_tweet se actualizara en todos los actor_tweet asociados a este
     @usuario = Usuario.find(params[:usuario_id])
     @tweet = Tweet.find(params[:id]);
     @actor_tweets = ActorTweet.select("*").where(:id_tweet => @tweet.id_tweet)
+    @textos = Texto.select("*").where(id_tweet: @tweet.id_tweet)
     respond_to do |format|
       if @tweet.update(tweet_params)
         @actor_tweets.update_all(:id_tweet => @tweet.id_tweet)
+        @textos.update_all(:id_tweet => @tweet.id_tweet)
         format.html { redirect_to @usuario, notice: 'Tweet actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @tweet }
       else
@@ -65,12 +69,17 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1
   # DELETE /tweets/1.json
   def destroy
+    #Si se elimina el tweet se eliminan todos los actor_tweet asociados a este
     @usuario = Usuario.find(params[:usuario_id])
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
     @actor_tweets = ActorTweet.select("*").where(:id_tweet => @tweet.id_tweet)
     @actor_tweets.each do |actor_tweet|
       actor_tweet.destroy
+    end
+    @textos = Texto.select("*").where(id_tweet: @tweet.id_tweet)
+    @textos.each do |text|
+      text.destroy
     end
     respond_to do |format|
       format.html { redirect_to @usuario, notice: 'El tweet se ha eliminado correctamente' }

@@ -10,25 +10,30 @@ class CuentaController < ApplicationController
   # GET /cuenta/1
   # GET /cuenta/1.json
   def show
+    @actors = Actor.find(params[:actor_id])
+    @cuenta = Cuentum.find(params[:id])
   end
 
   # GET /cuenta/new
   def new
+    @actors = Actor.find(params[:actor_id])
     @cuentum = Cuentum.new
   end
 
   # GET /cuenta/1/edit
   def edit
+    @actors = Actor.find(params[:actor_id])
+    @cuenta = Cuentum.find(params[:id])
   end
 
   # POST /cuenta
   # POST /cuenta.json
   def create
+    @actors = Actor.find(params[:actor_id])
     @cuentum = Cuentum.new(cuentum_params)
-
     respond_to do |format|
       if @cuentum.save
-        format.html { redirect_to @cuentum, notice: 'Cuentum was successfully created.' }
+        format.html { redirect_to @actors, notice: 'Cuenta creada correctamente.' }
         format.json { render :show, status: :created, location: @cuentum }
       else
         format.html { render :new }
@@ -40,9 +45,11 @@ class CuentaController < ApplicationController
   # PATCH/PUT /cuenta/1
   # PATCH/PUT /cuenta/1.json
   def update
+    @actors = Actor.find(params[:actor_id])
+    @cuenta = Cuentum.find(params[:id])
     respond_to do |format|
       if @cuentum.update(cuentum_params)
-        format.html { redirect_to @cuentum, notice: 'Cuentum was successfully updated.' }
+        format.html { redirect_to @actors, notice: 'Cuenta actualizada correctamente.' }
         format.json { render :show, status: :ok, location: @cuentum }
       else
         format.html { render :edit }
@@ -56,7 +63,7 @@ class CuentaController < ApplicationController
   def destroy
     @cuentum.destroy
     respond_to do |format|
-      format.html { redirect_to cuenta_url, notice: 'Cuentum was successfully destroyed.' }
+      format.html { redirect_to @actors, notice: 'Cuenta eliminada correctamente.' }
       format.json { head :no_content }
     end
   end
@@ -64,6 +71,7 @@ class CuentaController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cuentum
+      @actors = Actor.find(params[:actor_id])
       @cuentum = Cuentum.find(params[:id])
     end
 
